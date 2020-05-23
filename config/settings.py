@@ -128,3 +128,8 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 AUTH_USER_MODEL = "users.User"  # Replace Default User Model to one that I made
+
+# MEDIA_ROOT is BASE_DIR/uploads
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+
+MEDIA_URL = "/media/"
