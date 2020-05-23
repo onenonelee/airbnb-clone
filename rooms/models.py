@@ -60,7 +60,7 @@ class Photo(core_models.TimeStampedModel):
 
     caption = models.CharField(max_length=80)
     file = models.ImageField()
-    room = models.ForeignKey("Room", on_delete=models.CASCADE)
+    room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.caption
@@ -88,13 +88,17 @@ class Room(core_models.TimeStampedModel):
     # on_delete=model.CASCADE => when "user_models.User" is deleted, the room also gets deleted
     # on_delete=model.PROTECTED => "user_models.User" is unable to get deleted
     # on_delete=model.SET_NULL => when "user_models.User" is deleted, the room becomes orphan
-    host = models.ForeignKey("users.User", on_delete=models.CASCADE)
-    room_type = models.ForeignKey("RoomType", on_delete=models.SET_NULL, null=True)
+    host = models.ForeignKey(
+        "users.User", related_name="rooms", on_delete=models.CASCADE
+    )
+    room_type = models.ForeignKey(
+        "RoomType", related_name="rooms", on_delete=models.SET_NULL, null=True
+    )
 
     # ManyToManyField makes the variable to have many Relationships(multiple options)
-    amenities = models.ManyToManyField("Amenity", blank=True)
-    facilities = models.ManyToManyField("Facility", blank=True)
-    house_rules = models.ManyToManyField("HouseRule", blank=True)
+    amenities = models.ManyToManyField("Amenity", related_name="rooms", blank=True)
+    facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
+    house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
 
     def __str__(self):
         return self.name
