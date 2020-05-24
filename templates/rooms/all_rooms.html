@@ -7,8 +7,20 @@
 {% block content %}
 
     {% for room in AR  %}
-        <h1>{{room.name}} / ${{room.price}}</h1>
+        <h3>{{room.name}} / ${{room.price}}</h3>
     {% endfor %}
+
+    <h5>
+    {% if current_page is not 1 %}
+        <a href="?page={{current_page|add:-1}}">Previous</a>
+    {% endif %}
+
+    Page {{current_page}} of {{end_page}}
+
+    {% if not current_page == end_page  %}
+        <a href="?page={{current_page|add:1}}">Next</a>
+    {% endif %}
+    </h5>
 
 
 {% endblock content %}
