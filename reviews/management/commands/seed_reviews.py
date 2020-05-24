@@ -24,6 +24,7 @@ class Command(BaseCommand):
             review_models.Review,
             number,
             {
+                # lambda x = anonimous function
                 "accuracy": lambda x: random.randint(0, 6),
                 "communication": lambda x: random.randint(0, 6),
                 "cleanliness": lambda x: random.randint(0, 6),

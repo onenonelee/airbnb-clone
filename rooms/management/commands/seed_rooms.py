@@ -25,6 +25,8 @@ class Command(BaseCommand):
             room_models.Room,
             number,
             {
+                # lambda x = anonimous fuction
+                # faker providers many things
                 "name": lambda x: seeder.faker.address(),
                 "host": lambda x: random.choice(all_users),
                 "room_type": lambda x: random.choice(room_types),
