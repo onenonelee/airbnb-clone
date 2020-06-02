@@ -78,6 +78,9 @@ class RoomAdmin(admin.ModelAdmin):
     def count_photos(self, obj):
         return obj.photos.count()
 
+    class Meta:
+        ordering = ["-created"]
+
 
 @admin.register(models.Photo)
 class PhotoAdmin(admin.ModelAdmin):
